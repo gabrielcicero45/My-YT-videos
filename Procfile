@@ -1,1 +1,1 @@
-web: gunicorn MyYTvideos.wsgi
+web: gunicorn MyYTvideos.wsgi --log-file -
