@@ -14,7 +14,7 @@ def index(request):
         if request.POST['link']:
             link = request.POST['link']
             print(link)
-            sleep(5)
+            time.sleep(5)
             return FileResponse(open(YouTube(link).streams.first().download(skip_existing=True),'rb'))
         
     return render(request,'index.html')
