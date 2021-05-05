@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from django.contrib import messages
+from django.http import FileResponse
 from pytube import YouTube
 
 import os
@@ -11,9 +12,9 @@ def index(request):
     if request.method == 'POST':
         if request.POST['link']:
             link = request.POST['link']
-            yt = YouTube(link).streams.first().download(os.path.expanduser("~"))
+            yt = YouTube(link).streams.first().download(skip_existing=True)
             print(link)
-            return redirect('/downloaded')
+            return FileResponse(open(yt,'rb'))
         
     return render(request,'index.html')
 
